@@ -1,13 +1,24 @@
 <template>
     <div>
-        <div class="col-sm-6 col-md-4">
-            <div class="card">
-                <h5 class="card-header">{{ stock.name }}</h5>
+        <div class="row row-cols-1 row-cols-md-2">
+            <div class="col mb-4">
+            <div class="card border-warning" style="margin-top: 2vh">
+                <h5 class="card-header bg-warning mb-3 text-white">{{ stock.name }}</h5>
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <p class="card-text">Price: {{ stock.price }}</p>
+                    <div class="row">
+                        <div class="col">
+                            <input type="number" class="form-control" v-model="quantity">
+                        </div>
+                        <div class="col">
+                            <button
+                                href="#"
+                                class="btn btn-success"
+                                @click="buyStock">BUY</button>
+                        </div>
+                    </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
@@ -15,6 +26,11 @@
 
 <script>
 export default {
-    props: ['stock']
+    props: ['stock'],
+    data() {
+        return {
+            quantity: 0
+        }
+    }
 }
 </script>
