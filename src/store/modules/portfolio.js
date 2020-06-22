@@ -15,12 +15,27 @@ const mutations = {
             })
         }
         state.funds -= quantity * stockPrice
+    },
+    'SELL_STOCK'(state, {stockId, stockPrice, quantity}) {
+        const record = state.stocks.find(element => element.id == stockId);
+        if(record.quantity > quantity) {
+            record.quantity -= quantity
+        } else {
+            state.stocks.splice(state.stocks.indexOf(record), 1)
+        }
+        state.funds += stockPrice * quantity
+    },
+    'SET_PORTOFOLIO'(state, portfolio) {
+        state.stocks = portfolio.stockPortfolio ? portfolio.stockPortfolio : []
     }
 };
 
 const actions = {
     buyStock: ({commit}, order) => {
         commit('BUY_STOCK', order)
+    },
+    sellStock: ({commit}, order) => {
+        commit('SELL_STOCK', order)
     }
 };
 
